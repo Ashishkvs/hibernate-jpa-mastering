@@ -25,7 +25,16 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Course findById = courseRepository.findById(1000l);
-		logger.info("Course : {}",findById);
+		logger.info("Course : {}", findById);
+		// we will face transaction Issue if @Transactional not used in repository
+		/*
+		 * No EntityManager with actual transaction available for current thread -
+		 * cannot reliably process 'remove' call; nested exception is
+		 * javax.persistence.TransactionRequiredException: No EntityManager with actual
+		 * transaction available for current thread - cannot reliably process 'remove'
+		 * call
+		 */
+		courseRepository.deleteById(1001L);
 	}
 
 }

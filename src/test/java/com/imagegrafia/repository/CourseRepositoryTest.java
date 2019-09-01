@@ -31,4 +31,11 @@ class CourseRepositoryTest {
 		assertEquals("Java-OOPs", course.getName());
 	}
 
+	@Test
+	void testDeleteById() {
+		courseRepository.deleteById(1002L);
+		//check
+		assertNull(courseRepository.findById(1002L));
+	}
+
 }
