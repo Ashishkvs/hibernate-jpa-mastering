@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.imagegrafia.HibernateJpaMasteringApplication;
@@ -32,6 +33,8 @@ class CourseRepositoryTest {
 	}
 
 	@Test
+	//Reset the data after test
+	@DirtiesContext
 	void testDeleteById() {
 		courseRepository.deleteById(1002L);
 		//check

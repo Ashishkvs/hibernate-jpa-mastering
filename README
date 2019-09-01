@@ -2,3 +2,5 @@ h2-config
 =========
 intial h2 config
 junit test case
+
+@Transactional use case added in terms of EntityManager
