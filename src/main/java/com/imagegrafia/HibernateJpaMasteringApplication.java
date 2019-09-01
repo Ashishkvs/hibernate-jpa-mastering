@@ -35,6 +35,8 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 		 * call
 		 */
 		courseRepository.deleteById(1001L);
+		//insert data
+		courseRepository.save(new Course("Python"));
 	}
 
 }
