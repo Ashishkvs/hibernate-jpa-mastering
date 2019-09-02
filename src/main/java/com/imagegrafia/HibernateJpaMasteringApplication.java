@@ -37,6 +37,8 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 		courseRepository.deleteById(1001L);
 		//insert data
 		courseRepository.save(new Course("Python"));
+		//entity manager Transactional side effect
+		courseRepository.playWithEntityManager();
 	}
 
 }

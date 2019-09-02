@@ -46,17 +46,22 @@ class CourseRepositoryTest {
 		// find the course
 		Course course = courseRepository.findById(1000L);
 		assertEquals("Java-OOPs", course.getName());
-		
-		
+
 		// update the course
 		course.setName("Java-OOPs updated");
 		courseRepository.save(course);
-		
-		//Again find the value byId
-		
+
+		// Again find the value byId
+
 		Course updatedCourse = courseRepository.findById(1000L);
 		assertEquals("Java-OOPs updated", updatedCourse.getName());
-		
+
+	}
+
+	@Test
+	@DirtiesContext
+	public void testPlayWithEntityManager() {
+		courseRepository.playWithEntityManager();
 	}
 
 }

@@ -39,4 +39,16 @@ public class CourseRepository {
 		logger.info("Check Course Id : {}", course);// here if it is insert it will update with id
 		return course;
 	}
+
+	public void playWithEntityManager() {
+		Course course = new Course("WEb Development");
+		entityManager.persist(course);
+		// entity manager keeps track of changes when it is under @Transactional
+		course.setName("Web Devlopment updated");
+		// even if we call persist before update
+		// so above course will be updated No matter which line we called persit()
+		// entire method will be under @Transactional
+		// entityManager.merge(course); //NOT REQUIRED to update
+
+	}
 }
