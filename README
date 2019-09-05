@@ -4,3 +4,4 @@ intial h2 config
 junit test case
 
 @Transactional use case added in terms of EntityManager
+#entity manager keep track of entity in @Transactional state to update changes even after em.persist() has been called
