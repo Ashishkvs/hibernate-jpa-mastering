@@ -1,9 +1,9 @@
 package com.imagegrafia.repository;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,13 +16,12 @@ import com.imagegrafia.entity.Course;
 //load spring entire context
 @RunWith(SpringRunner.class)
 //explict context
-@SpringBootTest(classes = HibernateJpaMasteringApplication.class)
 class CourseRepositoryTest {
 
 	@Autowired
 	CourseRepository courseRepository;
 
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 	}
 

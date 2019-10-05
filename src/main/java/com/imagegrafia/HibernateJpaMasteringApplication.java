@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.imagegrafia.entity.Course;
 import com.imagegrafia.repository.CourseRepository;
+import com.imagegrafia.repository.ProductRepository;
 
 @SpringBootApplication
 public class HibernateJpaMasteringApplication implements CommandLineRunner {
@@ -29,8 +30,7 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 		// we will face transaction Issue if @Transactional not used in repository
 		/*
 		 * No EntityManager with actual transaction available for current thread -
-		 * cannot reli
-		 * ably process 'remove' call; nested exception is
+		 * cannot reli ably process 'remove' call; nested exception is
 		 * javax.persistence.TransactionRequiredException: No EntityManager with actual
 		 * transaction available for current thread - cannot reliably process 'remove'
 		 * call
@@ -38,8 +38,10 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 //		courseRepository.deleteById(1001L);
 //		//insert data
 //		courseRepository.save(new Course("Python"));
-		//entity manager Transactional side effect
+		// entity manager Transactional side effect
 		courseRepository.playWithEntityManager();
+		ProductRepository productRepository = new ProductRepository();
+		productRepository.playWithProduct();
 	}
 
 }
