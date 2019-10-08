@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,6 +22,21 @@ public class Course {
 
 	@OneToMany(mappedBy="course")
 	private List<Review> reviews = new ArrayList<Review>();
+
+	
+	@ManyToMany(mappedBy="courses")
+	private List<Student> students = new ArrayList<>();
+	
+	
+	
+	
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void addStudents(Student student) {
+		this.students.add(student);
+	}
 
 	protected Course() {
 	}
