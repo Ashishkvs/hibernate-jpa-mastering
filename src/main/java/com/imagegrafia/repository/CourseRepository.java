@@ -1,7 +1,8 @@
 package com.imagegrafia.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
-import javax.validation.constraints.Email;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,5 +87,16 @@ public class CourseRepository {
 		// save to database
 		entityManager.persist(review1);
 		entityManager.persist(review2);
+	}
+	
+	public void addReviewsForCourse(Long courseId,List<Review> reviews) {
+
+		Course course = findById(courseId);
+		logger.info("Review {} ", course.getReviews());
+		for(Review review : reviews) {
+			review.setCourse(course);
+			course.addReview(review);
+			entityManager.persist(review);
+		}
 	}
 }

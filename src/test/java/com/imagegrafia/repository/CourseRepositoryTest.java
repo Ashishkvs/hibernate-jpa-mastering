@@ -1,10 +1,16 @@
 package com.imagegrafia.repository;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -12,21 +18,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.imagegrafia.HibernateJpaMasteringApplication;
 import com.imagegrafia.entity.Course;
+import com.imagegrafia.entity.Review;
 
 //load spring entire context
 @RunWith(SpringRunner.class)
-//explict context
-class CourseRepositoryTest {
-
+@SpringBootTest(classes = HibernateJpaMasteringApplication.class)
+public class CourseRepositoryTest {
+	
+	private static final Logger log = LoggerFactory.getLogger(CourseRepositoryTest.class);
+	
 	@Autowired
 	CourseRepository courseRepository;
+	
+	@Autowired
+	EntityManager em;
 
-	@Before
-	void setUp() throws Exception {
-	}
 
 	@Test
-	void testFindById() {
+	public void testFindById() {
 		Course course = courseRepository.findById(1000L);
 		assertEquals("Java-OOPs", course.getName());
 	}
@@ -34,14 +43,14 @@ class CourseRepositoryTest {
 	@Test
 	// Reset the data after test
 	@DirtiesContext
-	void testDeleteById() {
+	public void testDeleteById() {
 		courseRepository.deleteById(1002L);
 		// check
 		assertNull(courseRepository.findById(1002L));
 	}
 
 	@Test
-	void testSave() {
+	public void testSave() {
 		// find the course
 		Course course = courseRepository.findById(1000L);
 		assertEquals("Java-OOPs", course.getName());
@@ -58,9 +67,22 @@ class CourseRepositoryTest {
 	}
 
 	@Test
-	@DirtiesContext
-	public void testPlayWithEntityManager() {
-		courseRepository.playWithEntityManager();
+//	@DirtiesContext
+	@Transactional
+	public void retrieveReviewForCourse() {
+		Course course = courseRepository.findById(1001L);
+		log.info("Reviews : -> {}" ,course.getReviews());
+	}
+	
+	/**
+	 * @ManyToOne is always eager fetching by default
+	 */
+	@Test
+//	@DirtiesContext
+//	@Transactional
+	public void retrieveCourseFromReview() {
+		Review review = em.find(Review.class,5001L);
+		log.info("Course : -> {}" ,review.getCourse());
 	}
 
 }
