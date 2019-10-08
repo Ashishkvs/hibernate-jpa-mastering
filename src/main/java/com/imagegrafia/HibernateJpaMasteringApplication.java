@@ -18,7 +18,7 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger("HibernateJpaMasteringApplication");
 
 	@Autowired
-	private StudentRepository studentRepository;
+	private CourseRepository courseRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HibernateJpaMasteringApplication.class, args);
@@ -27,7 +27,7 @@ public class HibernateJpaMasteringApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		studentRepository.saveStudentWithPassport();
+		courseRepository.addReviewForCourse();
 	}
 
 }

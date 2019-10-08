@@ -13,10 +13,9 @@ insert into student(id,name,passport_id)values(2002,'Anupam',4002);
 insert into student(id,name,passport_id)values(2003,'Kajal',4003);
 
 
-
-insert into review(id,rating,description)values(5001,'5','great course');
-insert into review(id,rating,description)values(5002,'4','awsome course');
-insert into review(id,rating,description)values(5003,'3','wat to say bout course');
+insert into review(id,rating,description,course_id)values(5001,'5','great course',1001);
+insert into review(id,rating,description,course_id)values(5002,'4','awsome course',1001);
+insert into review(id,rating,description,course_id)values(5003,'3','wat to say bout course',1002);
 
 insert into product(id,name,quantity,created_date,last_updated_date) values (1,'Laptop',1000,sysdate(),sysdate());
 insert into product(id,name,quantity,created_date,last_updated_date) values (2,'Mobile',500,sysdate(),sysdate());
