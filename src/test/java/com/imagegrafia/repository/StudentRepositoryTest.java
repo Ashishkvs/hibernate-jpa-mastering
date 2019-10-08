@@ -23,10 +23,10 @@ import com.imagegrafia.entity.Student;
 public class StudentRepositoryTest {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	StudentRepository studentRepository;
-	
+
 	@Autowired
 	EntityManager em;
 
@@ -35,16 +35,31 @@ public class StudentRepositoryTest {
 	}
 
 	/**
-	 * when we are having LAZY fetch we need @Transactional
+	 * when we are having LAZY fetch we need @Transactional hibernate waits until
+	 * last possible line flush() can send the changes to database till that method
+	 * even do we call flush if some error occur hibernate will rollback all updates
+	 * why we need @ Transactional in junit
+	 * directly using entityManager we are doing changes we need @ Transactional in JUNIT
+	 * see below example
 	 */
 	@Test
-	@Transactional
-	public void retrieveStudentAndPassport() {
-		Student student= em.find(Student.class,2001L);
-		log.info("student -> {}",student);
-		
+//	@Transactional
+	public void testSomeThingTransactional() {
+		studentRepository.someThingTransactional();
+		/*Student student = em.find(Student.class, 2001L);
 		Passport passport = student.getPassport();
-		log.info("passport -> {}",passport);
+		passport.setNumber("Pxwertyx123");
+		student.setName("Ashish Yadhuvanshi");*/
+	}
+
+	@Test
+	@Transactional
+	public void retrievePassportAndAssociatedStudent() {
+		Passport passport = em.find(Passport.class, 4001L);
+		log.info("passport -> {}", passport);
+
+		Student student = passport.getStudent();
+		log.info("student -> {}", student);
 	}
 
 }

@@ -49,4 +49,17 @@ public class StudentRepository {
 		student.setPassport(passport);
 		entityManager.persist(student);
 	}
+	
+	@Transactional
+	public void someThingTransactional() {
+		
+		Student student=entityManager.find(Student.class, 2001L);
+		
+		Passport passport = student.getPassport();
+		
+		passport.setNumber("Pxwertyx123");
+		
+		student.setName("Ashis Yadhuvanshi");
+		
+	}
 }
